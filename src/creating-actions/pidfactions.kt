@@ -10,7 +10,7 @@ class PIDFAction(private val motor: DcMotor, target: Int,coefficients: PIDFContr
         pidf.setTargetPosition(target)
     }
 
-    override fun run(p: TelemetryPacket): Boolean {
+    override fun loop(p: TelemetryPacket): Boolean {
         val position = motor.currentPosition
         val power = pidf.update(position.toDouble())
 
