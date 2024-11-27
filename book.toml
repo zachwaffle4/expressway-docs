@@ -1,6 +1,11 @@
 [book]
-title = "Expressway Docs"
-author = ["j5155, zach.waffle"]
+authors = ["Zach Harel"]
 language = "en"
 multilingual = false
 src = "src"
+title = "expressway-docs"
+
+[output.html]
+additional-css = ["theme/css/catppuccin.css"]
+default-theme = "latte"
+preferred-dark-theme = "macchiato"
