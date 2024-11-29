@@ -9,3 +9,4 @@ title = "expressway-docs"
 additional-css = ["theme/css/catppuccin.css"]
 default-theme = "latte"
 preferred-dark-theme = "macchiato"
+mathjax-support = true

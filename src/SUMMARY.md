@@ -6,6 +6,7 @@
 
 # Creating Actions in Expressway
 - [Base Actions](creating-actions/base-actions.md)
+- [Action Wrappers](creating-actions/actionwrappers.md)
 
 # Using Actions with Expressway
 - [ActionRunner](using-actions/actionrunner.md)
@@ -13,3 +14,4 @@
 
 # Controllers
 - [PIDF Controller](controllers/pidf-controller.md)
+- [Squid Controller](controllers/squidcontroller.md)

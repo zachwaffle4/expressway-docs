@@ -1,21 +1,17 @@
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import java.util.function.Supplier;
-
 public class PIDFActionEx extends InitLoopCondAction {
     private final DcMotor motor;
     private final PIDFController pidf;
     private int target;
 
-    public PIDFActionEx(DcMotor motor, int target, PIDFController.PIDCoefficients coefficients) {
+    public PIDFActionEx(DcMotor motor, int target, PIDFController pidf) {
         super(hasArrived(motor, target));
         this.motor = motor;
-        this.pidf = new PIDFController(coefficients);
+        this.pidf = pidf;
         this.target = target;
         this.pidf.setTargetPosition(target);
     }
 
-    private static Supplier<Boolean> hasArrived(DcMotor motor, int target) {
+    private static Condition hasArrived(DcMotor motor, int target) {
         return () -> motor.getCurrentPosition() >= (target - 50) && motor.getCurrentPosition() <= (target + 50);
     }
 
@@ -39,4 +35,3 @@ public class PIDFActionEx extends InitLoopCondAction {
         motor.setPower(power);
     }
 }
-

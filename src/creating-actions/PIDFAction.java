@@ -3,9 +3,9 @@ class PIDFAction implements InitLoopAction {
     private final PIDFController pidf;
     private int target;
 
-    public PIDFAction(DcMotor motor, int target, PIDFController.PIDCoefficients coefficients) {
+    public PIDFAction(DcMotor motor, int target, PIDFController controller) {
         this.motor = motor;
-        this.pidf = new PIDFController(coefficients);
+        this.pidf = pidf;
         this.target = target;
         this.pidf.setTargetPosition(target);
     }

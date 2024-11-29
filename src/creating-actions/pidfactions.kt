@@ -1,5 +1,5 @@
-class PIDFAction(private val motor: DcMotor, target: Int,coefficients: PIDFController.PIDCoefficients) : InitLoopAction {
-    val pidf = PIDFController(coefficients)
+class PIDFAction(private val motor: DcMotor, target: Int, private val pidf: PIDFController) : InitLoopAction {
+
     var target = target
         set(value) {
             pidf.targetPosition = value
@@ -27,10 +27,9 @@ fun hasArrived(motor: DcMotor, target: Int) : () -> Boolean {
 }
 
 class PIDFActionEx(
-    private val motor: DcMotor, target: Int, coefficients: PIDFController.PIDCoefficients, )
+    private val motor: DcMotor, target: Int, private val pidf: PIDFController)
     : InitLoopCondAction(hasArrived(motor, target))  {
 
-    private val pidf = PIDFController(coefficients)
     var target = target
         set(value) {
             pidf.targetPosition = value

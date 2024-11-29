@@ -70,6 +70,8 @@ class MyOpMode : OpMode {
 }
 ```
 
+Using the PIDFController with Actions can be found in the [Base Actions](../creating-actions/base-actions.md) section.
+
 ## Tuning
 Tuning the PIDF Controller is a process of adjusting the coefficients to get the desired behavior.
 There are many resources online that can help you with this,
