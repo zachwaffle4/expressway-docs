@@ -22,8 +22,8 @@ class PIDFAction(private val motor: DcMotor, target: Int, private val pidf: PIDF
     }
 }
 
-fun hasArrived(motor: DcMotor, target: Int) : () -> Boolean {
-    return { motor.currentPosition in (target - 50)..(target + 50) }
+fun hasArrived(motor: DcMotor, target: Int) : Condition {
+    return { motor.currentPosition !in (target - 50)..(target + 50) }
 }
 
 class PIDFActionEx(

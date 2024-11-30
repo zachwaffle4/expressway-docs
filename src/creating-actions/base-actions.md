@@ -2,6 +2,14 @@
 Expressway comes with two new base action types: `InitLoopAction` and `InitLoopCondAction` (aka `ILCAction`).
 These can be used for anything a regular `Action` can be used for, but they are easier to read and write.
 
+```admonish tip
+While `InitLoopAction` and `InitLoopCondAction` are both more verbose than the base `Action`,
+they are easier to read and write, and can be more powerful in some situations.
+Expressway provides these two new base actions to make it easier to write complex actions,
+but you can still use the base `Action` if you prefer.
+When creating actions, you should choose the one that best fits your needs.
+```
+
 ## InitLoopAction
 `InitLoopAction` is an `Action` with two methods: `init` and `loop: Boolean`. 
 `init` is called once when the action is first started, 
@@ -42,7 +50,8 @@ Here is a Java version of the same action:
 Similarly to the `InitLoopAction`, the `InitLoopCondAction` is an `Action` with two methods: `init` and `loop`.
 However, the constructor of the `InitLoopCondAction` takes a `Condition`, 
 an interface with a single method `invoke: Boolean`. 
-Every time the action is run, it will check `condition` and stop if it returns true (which is opposite to both `Action` and `InitLoopAction`).
+Every time the action is run, it will check `condition` and stop if it returns false.
+The `condition` is essentially what the return statement of the `loop` method would be in a regular `InitLoopAction`.
 
 One benefit of this (aside from the fact that it is easier to read and write)
 is that you can access the `isRunning` property to check if the action is running (i.e. `condition` is false).
@@ -50,9 +59,12 @@ is that you can access the `isRunning` property to check if the action is runnin
 You can also access the `condition` function from the `Action` object
 with `<object>.condition` (or `<object>.getCondition()` in Java).
 Because `condition` is a function, to call it you need parentheses, like `<object>.condition()`.
-Note that in Java you must call the `invoke` function explicitly, like `<object>.condition.invoke()`, 
-whereas in Kotlin you can call it like a regular function, `<object>.condition()`.
+Note that in Java you must call the `get` function explicitly, like `<object>.condition.get()`, 
 The reason for this is explained in the example below.
+
+The other benefit of `InitLoopCondAction` is the ability to define an explicit `cleanup` method.
+The `cleanup` method is called when the action is done,
+and can be used to reset any variables or states that the action may have changed.
 
 Here is an example of an `InitLoopCondAction` using the same PIDF controller as before:
 
@@ -60,15 +72,14 @@ Here is an example of an `InitLoopCondAction` using the same PIDF controller as 
 {{#include pidfactions.kt:23:}}
 ```
 
-In this situation, we define a function `hasArrived(motor: DcMotor, target: Int): () -> Boolean` that returns true if the motor is within 50 encoder ticks of the target position.
-The return type `() -> Boolean` indicates that we are actually returning a function[^note], 
+In this situation, we define a function `hasArrived(motor: DcMotor, target: Int): Condition` that returns true if the motor is within 50 encoder ticks of the target position.
+The return type `Condition` indicates that we are actually returning a function[^note], 
 and not whether the motor has arrived or not at the time `hasArrived` is called. 
 This is because we want to check if the motor has arrived every time the action is run, not just when it is first instantiated.
 When defining `hasArrived`, we use `{}` to specify that we are defining a function to return, and not returning the Boolean value of the expression inside the braces.
 
-When creating the `InitLoopCondAction`, we pass `hasArrived` into the *superclass* constructor.
-and the action will return `true` when `hasArrived` returns `false`, meaning it will continue.
-Once `hasArrived` returns `true`, the action will return `false`, meaning it is done.
+When creating the `InitLoopCondAction`, we pass `hasArrived` into the *superclass* constructor,
+which is the constructor of the `InitLoopCondAction` class.
 
 We can also see that the `init` method is the same as before, 
 and the `loop` method is almost the same as before, but it does not return any value.
@@ -78,7 +89,7 @@ Lastly, instead of defining `hasArrived` as a separate function, we could define
 ```kotlin
 class PIDFActionEx(
     private val motor: DcMotor, target: Int, coefficients: PIDFController.PIDCoefficients, ) 
-    : InitLoopCondAction( { motor.currentPosition in (target - 50)..(target + 50) }) {
+    : InitLoopCondAction( { motor.currentPosition !in (target - 50)..(target + 50) }) {
 ```
 
 This is useful if you only need to use the function once, and do not want to define it elsewhere in your code.
@@ -100,11 +111,13 @@ Just like before, though, we can define `hasArrived` as an anonymous function in
 ```java
 public class PIDFActionEx extends InitLoopCondAction {
     public PIDFActionEx(DcMotor motor, int target, PIDFController.PIDCoefficients coefficients) {
-        super(() -> motor.getCurrentPosition() >= target - 50 && motor.getCurrentPosition() <= target + 50);
+        super(() -> motor.getCurrentPosition() <= target - 50 || motor.getCurrentPosition() >= target + 50);
         //rest of the constructor
     }
 }
 ```
+
+
 
 [^note]: Kotlin will convert `hasArrived` to a `Condition` object automatically,
 which is why we can pass it directly into the `InitLoopCondAction` constructor.

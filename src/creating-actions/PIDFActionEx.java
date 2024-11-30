@@ -12,7 +12,7 @@ public class PIDFActionEx extends InitLoopCondAction {
     }
 
     private static Condition hasArrived(DcMotor motor, int target) {
-        return () -> motor.getCurrentPosition() >= (target - 50) && motor.getCurrentPosition() <= (target + 50);
+        return () -> motor.getCurrentPosition() <= (target - 50) || motor.getCurrentPosition() >= (target + 50);
     }
 
     public void setTarget(int value) {
