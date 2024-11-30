@@ -15,3 +15,6 @@
 # Controllers
 - [PIDF Controller](controllers/pidf-controller.md)
 - [Squid Controller](controllers/squidcontroller.md)
+
+# Concepts (Optional)
+- [Functions as Parameters](concepts/functional.md)
