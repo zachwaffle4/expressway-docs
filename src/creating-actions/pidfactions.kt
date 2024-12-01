@@ -1,4 +1,4 @@
-class PIDFAction(private val motor: DcMotor, target: Int, private val pidf: PIDFController) : InitLoopAction {
+class PIDAction(private val motor: DcMotor, target: Int, private val controller: PIDFController) : InitLoopAction() {
 
     var target = target
         set(value) {
@@ -11,14 +11,14 @@ class PIDFAction(private val motor: DcMotor, target: Int, private val pidf: PIDF
     }
 
     override fun loop(p: TelemetryPacket): Boolean {
-        val position = motor.currentPosition
-        val power = pidf.update(position.toDouble())
+        val position: Int = motor.getCurrentPosition()
+        val power: Double = pidf.update(position.toDouble())
 
-        p.put("Motor Info", "Target: $target; Error ${target-position}; Power: $power")
+        p.put("Motor Info", "Target: " + target + "; Error " + (target - position) + "; Power: " + power)
 
-        motor.power = power
+        motor.setPower(power)
 
-        return position !in (target - 50)..(target + 50)
+        return position < (target - 50) || position > (target + 50)
     }
 }
 
@@ -27,7 +27,7 @@ fun hasArrived(motor: DcMotor, target: Int) : Condition {
 }
 
 class PIDFActionEx(
-    private val motor: DcMotor, target: Int, private val pidf: PIDFController)
+    private val motor: DcMotor, target: Int, private val controller: PIDFController)
     : InitLoopCondAction(hasArrived(motor, target))  {
 
     var target = target

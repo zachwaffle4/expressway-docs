@@ -1,12 +1,12 @@
 public class PIDFActionEx extends InitLoopCondAction {
     private final DcMotor motor;
-    private final PIDFController pidf;
+    private final PIDFController controller;
     private int target;
 
-    public PIDFActionEx(DcMotor motor, int target, PIDFController pidf) {
+    public PIDFActionEx(DcMotor motor, int target, PIDFController controller) {
         super(hasArrived(motor, target));
         this.motor = motor;
-        this.pidf = pidf;
+        this.controller = controller;
         this.target = target;
         this.pidf.setTargetPosition(target);
     }

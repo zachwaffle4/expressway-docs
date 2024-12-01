@@ -1,11 +1,11 @@
-class PIDFAction implements InitLoopAction {
+class PIDFAction extends InitLoopAction {
     private final DcMotor motor;
     private final PIDFController pidf;
     private int target;
 
     public PIDFAction(DcMotor motor, int target, PIDFController controller) {
         this.motor = motor;
-        this.pidf = pidf;
+        this.pidf = controller;
         this.target = target;
         this.pidf.setTargetPosition(target);
     }
@@ -21,7 +21,7 @@ class PIDFAction implements InitLoopAction {
     }
 
     @Override
-    public boolean run(TelemetryPacket p) {
+    public boolean loop(TelemetryPacket p) {
         int position = motor.getCurrentPosition();
         double power = pidf.update((double) position);
 
@@ -32,4 +32,3 @@ class PIDFAction implements InitLoopAction {
         return position < (target - 50) || position > (target + 50);
     }
 }
-
