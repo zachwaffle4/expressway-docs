@@ -14,6 +14,6 @@ maven {
 
 Add the following lines to the "dependencies" block of that same build.gradle:
 ```groovy
-implementation "page.j5155.roadrunner:expressway:core:0.3.0"
+implementation "page.j5155.roadrunner:expressway.core:0.3.0"
 implementation "page.j5155.roadrunner.expressway:ftc:0.3.0"
 ```
