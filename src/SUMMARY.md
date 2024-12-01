@@ -10,6 +10,7 @@
 # Using Actions with Expressway
 - [ActionRunner](using-actions/actionrunner.md)
 - [Action OpModes](using-actions/actionopmodes.md)
+- [Point-to-Point Actions](using-actions/point-to-point.md)
 
 # Controllers
 - [PIDF Controller](controllers/pidf-controller.md)
