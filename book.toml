@@ -10,6 +10,8 @@ additional-css = ["theme/css/catppuccin.css", "theme/css/mdbook-admonish.css"]
 default-theme = "latte"
 preferred-dark-theme = "macchiato"
 mathjax-support = true
+git-repository-url = "https://github.com/zachwaffle4/expressway-docs"
+edit-url-template = "https://github.com/zachwaffle4/expressway-docs/tree/main/{path}"
 
 [preprocessor]
 
