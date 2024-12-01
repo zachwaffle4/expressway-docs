@@ -1,7 +1,6 @@
 # Summary
-
-# Welcome
-- [Introduction](introduction.md)
+ 
+[Introduction](introduction.md)
 - [Installation](installation.md)
 
 # Creating Actions in Expressway
