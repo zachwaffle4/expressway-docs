@@ -45,7 +45,7 @@ Here is a Java version of the same action:
 {{#include PIDFAction.java}}
 ``` 
 
-### InitLoopCondAction
+## InitLoopCondAction
 
 Similarly to the `InitLoopAction`, the `InitLoopCondAction` is an `Action` with two methods: `init` and `loop`.
 However, the constructor of the `InitLoopCondAction` takes a `Condition`, 
