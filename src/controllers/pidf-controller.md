@@ -73,6 +73,20 @@ class MyOpMode : OpMode {
 Using the PIDFController with Actions can be found in the [Base Actions](../creating-actions/base-actions.md) section.
 
 ## Tuning
+
 Tuning the PIDF Controller is a process of adjusting the coefficients to get the desired behavior.
 There are many resources online that can help you with this,
 including the [CtrlAltFtc](https://www.ctrlaltftc.com/) website mentioned earlier.
+
+This article will not go into detail about tuning the PIDF Controller,
+but here is a brief overview of the effects of increasing the basic PID coefficients on the system:
+
+### Effects of increasing coefficients on the system:
+
+| Parameter | Rise Time    | Overshoot | Settling Time | Steady-State Error | Stability |
+|-----------|--------------|-----------|---------------|--------------------|-----------|
+| `kP`      | Decrease     | Increase  | Small Change  | Decrease           | Decrease  |
+| `kI`      | Decrease     | Increase  | Increase      | Eliminate          | Decrease  |
+| `kD`      | Small Change | Decrease  | Decrease      | No Change          | Increase  |
+
+Table sourced from [Wikipedia](https://en.wikipedia.org/wiki/PID_controller#Manual_tuning).
