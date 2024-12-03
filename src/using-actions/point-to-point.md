@@ -16,7 +16,7 @@ or by contacting us on our Discord server.
 The `PIDToPoint` constructor is the following:
 ```kt
     private val pose: Supplier<Pose2d>,
-    private val vel: Supplier<Vector2d>,
+    private val vel: Supplier<PoseVelocity2d>,
     private val target: Pose2d,
     private val powerUpdater: Consumer<PoseVelocity2d>,
     axialCoefs: PIDFController.PIDCoefficients,

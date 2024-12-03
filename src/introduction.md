@@ -10,6 +10,10 @@ installation instructions can be found [here](installation.md).
 We also have a [Discord server](https://discord.gg/YucesWwY4N) 
 where you can ask questions and get help with Expressway and RoadRunner.
 
+```admonish success
+Latest Version: 0.3.6
+```
+
 ## What is Expressway?
 
 Expressway is a library built on top of RoadRunner that provides a more flexible and powerful way to create actions.

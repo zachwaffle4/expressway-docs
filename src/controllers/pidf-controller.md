@@ -78,6 +78,9 @@ Tuning the PIDF Controller is a process of adjusting the coefficients to get the
 There are many resources online that can help you with this,
 including the [CtrlAltFtc](https://www.ctrlaltftc.com/) website mentioned earlier.
 
+To make tuning easier, all of the PIDFController parameters
+are public `var`s so you can change them after object creation. 
+
 This article will not go into detail about tuning the PIDF Controller,
 but here is a brief overview of the effects of increasing the basic PID coefficients on the system:
 
