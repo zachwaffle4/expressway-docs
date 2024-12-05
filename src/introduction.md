@@ -11,7 +11,7 @@ We also have a [Discord server](https://discord.gg/YucesWwY4N)
 where you can ask questions and get help with Expressway and RoadRunner.
 
 ```admonish success
-Latest Version: 0.3.6
+Latest Version: 0.3.7
 ```
 
 ## What is Expressway?

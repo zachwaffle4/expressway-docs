@@ -15,8 +15,8 @@ maven {
 
 Add the following lines to the "dependencies" block of that same build.gradle:
 ```groovy
-implementation "page.j5155.roadrunner.expressway:core:0.3.6"
-implementation "page.j5155.roadrunner.expressway:ftc:0.3.6"
+implementation "page.j5155.roadrunner.expressway:core:0.3.7"
+implementation "page.j5155.roadrunner.expressway:ftc:0.3.7"
 ```
 
 You must do a Gradle Sync after adding these lines to your build.gradle file
